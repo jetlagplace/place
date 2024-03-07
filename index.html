@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Jet Lag Place</title>
+        <link rel="stylesheet" type="text/css" href="./style.css" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+        <script src="js/locations.js"></script>
+        <script src="js/video.js"></script>
+    </head>
+    <body>
+        <div class="box">
+            <div class="row header">
+                <p id="title">Jet Lag</p>
+            </div>
+            <div class="row content">
+                <div id="video"></div>
+                <div id="map"></div>
+            </div>
+            <div class="row footer">
+                <p>
+                    <a href="https://github.com/jetlagplace/place">code</a> | 
+                    <a href="https://github.com/jetlagplace/place/issues">issues</a>
+                </p>
+            </div>
+        </div>
+
+        <script>
+            fetch('./episodes/09x01.json')
+                .then((response) => response.json())
+                .then((json) => {
+                    document.getElementById('title').innerHTML = "Season " + json.season + ": " + json.title;
+                    createVideoPlayer(json.videoId);
+                    window.markers = json.markers;
+                });
+        </script>
+        <script src="js/map.js"></script>
+    </body>
+</html>
